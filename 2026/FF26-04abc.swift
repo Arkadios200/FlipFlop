@@ -3,7 +3,7 @@ extension Sequence {
     return Array(zip(self, self.dropFirst()))
   }
 
-  func count(cond: (Element) -> Bool) -> Int {
+  func count(where cond: (Element) -> Bool) -> Int {
     return self.filter(cond).count
   }
 }
