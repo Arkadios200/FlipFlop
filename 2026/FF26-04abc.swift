@@ -15,10 +15,7 @@ func getInput() -> [String] {
   return out
 }
 
-let leaves = [
-  "o-|": "L",
-  "  |-o": "R",
-]
+let leaves = [ "o-|": "L", "  |-o": "R" ]
 
 func part1(_ stalk: [String], _ cut: Int = 400) -> Int {
   return stalk.dropLast(cut + 1)
