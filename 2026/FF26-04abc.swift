@@ -23,7 +23,6 @@ func part1(_ stalk: [String], _ cut: Int = 400) -> Int {
 }
 
 func part2(_ stalk: [String]) -> Int {
-
   return stalk.compactMap { leaves[$0] }
     .tupleWindows()
     .count { $0.0 != $0.1 }
