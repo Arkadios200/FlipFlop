@@ -25,10 +25,10 @@ func part2(_ route: [Direction], _ sushi: [Point]) -> Int {
 		if snake.first! == sushi[i] { i += 1 }
 		else { snake.removeLast() }
 
-		if snake.dropFirst().contains(snake.first!) { break }
+		if snake.dropFirst().contains(snake.first!) { return snake.count }
 	}
 
-	return snake.count
+	fatalError()
 }
 
 func part3(_ route: [Direction], _ sushi: [Point]) -> Int {
