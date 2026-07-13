@@ -85,7 +85,7 @@ func part3(_ route: [Direction], _ sushi: [Point]) -> Int {
     else { snake.removeLast() }
 
     if let seg = snake.dropFirst().firstIndex(of: snake.first!) {
-      snake = Array(snake.prefix(seg-1))
+      snake.removeSubrange(seg...)
       ateSelf += 1
     }
   }
