@@ -32,11 +32,11 @@ func part2(_ lines: [[String]]) -> Int {
     let val1 = [key1.first!] + line.dropFirst(2)
     rules[key1] = val1
 
-    if line[0] != line[1] {
-      let key2 = [line[1], line[0]]
-      let val2 = [key2.first!] + line.dropFirst(2)
-      rules[key2] = val2
-    }
+    if line[0] == line[1] { continue }
+
+    let key2 = [line[1], line[0]]
+    let val2 = [key2.first!] + line.dropFirst(2)
+    rules[key2] = val2
   }
 
   var stoats: [String] = ["A", "B"]
@@ -61,11 +61,11 @@ func part3(_ lines: [[String]]) -> Int {
     let val1 = [key1.first!] + line.dropFirst(2) + [key1.last!]
     rules[key1] = val1
 
-    if line[0] != line[1] {
-      let key2 = [line[1], line[0]]
-      let val2 = [key2.first!] + line.dropFirst(2) + [key2.last!]
-      rules[key2] = val2
-    }
+    if line[0] == line[1] { continue }
+
+    let key2 = [line[1], line[0]]
+    let val2 = [key2.first!] + line.dropFirst(2) + [key2.last!]
+    rules[key2] = val2
   }
 
   var stoats: [[String]: Int] = [["A", "B"]: 1]
