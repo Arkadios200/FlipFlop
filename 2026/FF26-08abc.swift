@@ -41,14 +41,7 @@ func part2(_ lines: [[String]]) -> Int {
 
   var stoats: [String] = ["A", "B"]
   for _ in 1...7 {
-    var next: [String] = []
-    for w in stoats.windows(of: 2) {
-      next += rules[Array(w)]!
-    }
-
-    next.append(stoats.last!)
-
-    stoats = next
+    stoats = stoats.windows(of: 2).map { rules[Array($0)]! }.joined() + [stoats.last!]
   }
 
   return stoats.count
