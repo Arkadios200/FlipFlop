@@ -7,10 +7,7 @@ func main() {
 }
 
 func part1(_ lines: [[String]]) -> Int {
-  var rules: [String: [String]] = [:]
-  for line in lines {
-    if rules[line.first!] == nil { rules[line.first!] = Array(line.dropFirst()) }
-  }
+  let rules = getRules1(lines)
 
   var stoats: [String: Int] = ["A": 1, "B": 1]
   for _ in 1...7 {
@@ -26,40 +23,18 @@ func part1(_ lines: [[String]]) -> Int {
 }
 
 func part2(_ lines: [[String]]) -> Int {
-  var rules: [[String]: [String]] = [:]
-  for line in lines {
-    let key1 = [line[0], line[1]]
-    let val1 = [key1.first!] + line.dropFirst(2)
-    rules[key1] = val1
-
-    if line[0] == line[1] { continue }
-
-    let key2 = [line[1], line[0]]
-    let val2 = [key2.first!] + line.dropFirst(2)
-    rules[key2] = val2
-  }
+  let rules = getRules2(lines)
 
   var stoats: [String] = ["A", "B"]
   for _ in 1...7 {
-    stoats = stoats.windows(of: 2).map { rules[Array($0)]! }.joined() + [stoats.last!]
+    stoats = stoats.windows(of: 2).map { rules[Array($0)]!.dropLast() }.joined() + [stoats.last!]
   }
 
   return stoats.count
 }
 
 func part3(_ lines: [[String]]) -> Int {
-  var rules: [[String]: [String]] = [:]
-  for line in lines {
-    let key1 = [line[0], line[1]]
-    let val1 = [key1.first!] + line.dropFirst(2) + [key1.last!]
-    rules[key1] = val1
-
-    if line[0] == line[1] { continue }
-
-    let key2 = [line[1], line[0]]
-    let val2 = [key2.first!] + line.dropFirst(2) + [key2.last!]
-    rules[key2] = val2
-  }
+  let rules = getRules2(lines)
 
   var stoats: [[String]: Int] = [["A", "B"]: 1]
   for _ in 1...21 {
@@ -74,6 +49,32 @@ func part3(_ lines: [[String]]) -> Int {
   }
 
   return stoats.values.reduce(1, +)
+}
+
+func getRules1(_ lines: [[String]]) -> [String: [String]] {
+  var rules: [String: [String]] = [:]
+  for line in lines {
+    if rules[line.first!] == nil { rules[line.first!] = Array(line.dropFirst()) }
+  }
+
+  return rules
+}
+
+func getRules2(_ lines: [[String]]) -> [[String]: [String]] {
+  var rules: [[String]: [String]] = [:]
+  for line in lines {
+    let key1 = [line[0], line[1]]
+    let val1 = [key1.first!] + line.dropFirst(2) + [key1.last!]
+    rules[key1] = val1
+
+    if line[0] == line[1] { continue }
+
+    let key2 = [line[1], line[0]]
+    let val2 = [key2.first!] + line.dropFirst(2) + [key2.last!]
+    rules[key2] = val2
+  }
+
+  return rules
 }
 
 func getInput() -> [[String]] {
