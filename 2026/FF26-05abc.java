@@ -166,6 +166,8 @@ enum Direction {
     throw new RuntimeException();
   }
 
+  // Tried to write a constructor in Point
+  // to do this, but, well... Java.
   public Point toPoint() {
     switch (this) {
     case UP:
