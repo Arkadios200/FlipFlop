@@ -195,8 +195,7 @@ enum Direction {
     case '<':
       return LEFT;
     default:
-      // Unreachable
-      throw new RuntimeException();
+      throw new RuntimeException(String.format("Invalid input: %c", c));
     }
   }
 
