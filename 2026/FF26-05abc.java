@@ -64,12 +64,12 @@ public class Main {
 
             if (!record.add(new Point(pos))) {
               if (illegalTurns < 3
-                && pos.x > 0
-                && pos.x < grid.get(0).size() - 1 
-                && pos.y > 0
-                && pos.y < grid.size() - 1) {
+              && pos.x > 0
+              && pos.x < grid.get(0).size() - 1 
+              && pos.y > 0
+              && pos.y < grid.size() - 1) {
                 illegalTurns += 1;
-                  pos.step(grid.get(pos.y).get(pos.x).right());
+                pos.step(grid.get(pos.y).get(pos.x).right());
                 skip = true;
               } else break;
             }
@@ -91,22 +91,7 @@ public class Main {
     while (sc.hasNextLine()) {
       List<Direction> row = new ArrayList<>();
       for (char c : sc.nextLine().toCharArray()) {
-        switch (c) {
-        case '^':
-          row.add(Direction.UP);
-          break;
-        case '>':
-          row.add(Direction.RIGHT);
-          break;
-        case 'v':
-          row.add(Direction.DOWN);
-          break;
-        case '<':
-          row.add(Direction.LEFT);
-          break;
-        default:
-          throw new RuntimeException();
-        }
+        row.add(Direction.fromChar(c));
       }
 
       grid.add(row);
@@ -191,6 +176,21 @@ enum Direction {
       return new Point(0, 1);
     case LEFT:
       return new Point(-1, 0);
+    default:
+      throw new RuntimeException();
+    }
+  }
+
+  static Direction fromChar(char c) {
+    switch (c) {
+    case '^':
+      return UP;
+    case '>':
+      return RIGHT;
+    case 'v':
+      return DOWN;
+    case '<':
+      return LEFT;
     default:
       throw new RuntimeException();
     }
