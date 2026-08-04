@@ -127,23 +127,11 @@ class Point {
   }
 
   public Point(Point p) {
-    this.x = p.x;
-    this.y = p.y;
+    this(p.x, p.y);
   }
 
   public Point next(Direction dir) {
-    switch (dir) {
-    case UP:
-      return this.add(new Point(0, -1));
-    case RIGHT:
-      return this.add(new Point(1, 0));
-    case DOWN:
-      return this.add(new Point(0, 1));
-    case LEFT:
-      return this.add(new Point(-1, 0));
-    default:
-      throw new RuntimeException();
-    }
+    return this.add(dir.toPoint());
   }
 
   public void step(Direction dir) {
@@ -188,6 +176,21 @@ enum Direction {
       return LEFT;
     case LEFT:
       return UP;
+    default:
+      throw new RuntimeException();
+    }
+  }
+
+  public Point toPoint() {
+    switch (this) {
+    case UP:
+      return new Point(0, -1);
+    case RIGHT:
+      return new Point(1, 0);
+    case DOWN:
+      return new Point(0, 1);
+    case LEFT:
+      return new Point(-1, 0);
     default:
       throw new RuntimeException();
     }
