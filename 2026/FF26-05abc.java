@@ -156,18 +156,14 @@ enum Direction {
   LEFT;
 
   public Direction right() {
-    switch (this) {
-    case UP:
-      return RIGHT;
-    case RIGHT:
-      return DOWN;
-    case DOWN:
-      return LEFT;
-    case LEFT:
-      return UP;
-    default:
-      throw new RuntimeException();
+    for (int i = 0; i < 4; i++) {
+      if (cycle[i] == this) {
+        return cycle[(i + 1) % 4];
+      }
     }
+
+    // Unreachable
+    throw new RuntimeException();
   }
 
   public Point toPoint() {
@@ -181,6 +177,7 @@ enum Direction {
     case LEFT:
       return new Point(-1, 0);
     default:
+      // Unreachable
       throw new RuntimeException();
     }
   }
@@ -196,6 +193,7 @@ enum Direction {
     case '<':
       return LEFT;
     default:
+      // Unreachable
       throw new RuntimeException();
     }
   }
