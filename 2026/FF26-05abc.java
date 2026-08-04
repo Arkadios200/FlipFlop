@@ -200,7 +200,7 @@ enum Direction {
     }
   }
 
-  public static final Direction[] cycle = new Direction[] {
+  public static final Direction[] cycle = {
     UP,
     RIGHT,
     DOWN,
