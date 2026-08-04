@@ -19,7 +19,7 @@ public class Main {
     Set<Point> record = new HashSet<>();
 
     while (record.add(new Point(pos))) {
-      pos.step(grid.get(pos.y).get(pos.x));
+      pos.step(pos.findIn(grid));
     }
 
     return record.size();
@@ -59,7 +59,7 @@ public class Main {
           boolean skip = false;
           while (true) {
             if (!skip) {
-              pos.step(grid.get(pos.y).get(pos.x));
+              pos.step(pos.findIn(grid));
             } else skip = false;
 
             if (!record.add(new Point(pos))) {
@@ -69,7 +69,7 @@ public class Main {
               && pos.y > 0
               && pos.y < grid.size() - 1) {
                 illegalTurns += 1;
-                pos.step(grid.get(pos.y).get(pos.x).right());
+                pos.step(pos.findIn(grid).right());
                 skip = true;
               } else break;
             }
@@ -130,6 +130,10 @@ class Point {
     return new Point(this.x + other.x, this.y + other.y);
   }
 
+  public <T> T findIn(List<List<T>> grid) {
+    return grid.get(y).get(x);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -181,7 +185,7 @@ enum Direction {
     }
   }
 
-  public static Direction fromChar(char c) {
+  static Direction fromChar(char c) {
     switch (c) {
     case '^':
       return UP;
