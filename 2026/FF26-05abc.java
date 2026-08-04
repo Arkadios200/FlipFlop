@@ -181,7 +181,7 @@ enum Direction {
     }
   }
 
-  static Direction fromChar(char c) {
+  public static Direction fromChar(char c) {
     switch (c) {
     case '^':
       return UP;
