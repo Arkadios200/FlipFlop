@@ -30,7 +30,7 @@ public class Main {
     for (int i = 1; i < grid.size() - 2; i++) {
       for (int j = 1; j < grid.get(i).size() - 2; j++) {
         Direction temp = grid.get(i).get(j);
-        for (Direction dir : new Direction[] { Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT }) {
+        for (Direction dir : Direction.cycle) {
           grid.get(i).set(j, dir);
           int score = part1(grid);
           if (ans < score) ans = score;
@@ -48,7 +48,7 @@ public class Main {
     for (int i = 1; i < grid.size() - 2; i++) {
       for (int j = 1; j < grid.get(i).size() - 2; j++) {
         Direction temp = grid.get(i).get(j);
-        for (Direction dir : new Direction[] { Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT }) {
+        for (Direction dir : Direction.cycle) {
           grid.get(i).set(j, dir);
 
           Point pos = new Point(0, 0);
@@ -199,4 +199,11 @@ enum Direction {
       throw new RuntimeException();
     }
   }
+
+  public static final Direction[] cycle = new Direction[] {
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT,
+  };
 }
